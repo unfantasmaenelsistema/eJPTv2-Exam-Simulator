@@ -221,8 +221,8 @@ hashcat -m 1000 ntlm_hashes.txt /usr/share/wordlists/rockyou.txt
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://github.com/TU_USUARIO/ejptv2-exam-pivoting-simulator.git
-cd ejptv2-exam-pivoting-simulator
+git clone https://github.com/unfantasmaenelsistema/eJPTv2-Exam-Simulator.git
+cd eJPTv2-Exam-Simulator
 
 # 2. Instalar dependencias
 npm install

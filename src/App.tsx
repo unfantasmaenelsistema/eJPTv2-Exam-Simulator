@@ -120,6 +120,14 @@ export default function App() {
     };
   });
 
+  // Always holds the latest commandContext synchronously, even across multiple
+  // onExecuteCommand calls fired back-to-back in the same tick (e.g. MetasploitPanel's
+  // batched `use` + `set` + `exploit` sequence), where React state is still stale.
+  const commandContextRef = useRef<CommandContext>(commandContext);
+  useEffect(() => {
+    commandContextRef.current = commandContext;
+  }, [commandContext]);
+
   // Terminal Outputs
   const [terminalOutputs, setTerminalOutputs] = useState<TerminalOutputLine[]>(() => {
     const savedPivoting = getSavedPivotingState(currentLab.id);
@@ -482,20 +490,29 @@ export default function App() {
 
   // Command Execution
   const handleExecuteCommand = (cmd: string) => {
-    const promptText = getPromptString(commandContext);
+    // Read from the ref, not the `commandContext` state closure: callers like
+    // MetasploitPanel fire several onExecuteCommand calls synchronously in the
+    // same tick (e.g. `use <module>` immediately followed by `exploit`), and
+    // React won't have committed the state update from the first call yet.
+    const prevCtx = commandContextRef.current;
+    const promptText = getPromptString(prevCtx);
     const cmdLine: TerminalOutputLine = {
-      id: `cmd-${Date.now()}`,
+      // Date.now() alone collides when several commands run within the same
+      // millisecond (e.g. MetasploitPanel's batched `set` calls), producing
+      // duplicate React keys in Terminal's output list.
+      id: `cmd-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       type: 'command',
       prompt: promptText,
       text: cmd,
       timestamp: Date.now()
     };
 
-    const { lines, nextCtx } = processCommand(cmd, commandContext);
+    const { lines, nextCtx } = processCommand(cmd, prevCtx);
 
     // Keep commandHistory state synchronized with sessionStorage
     setCommandHistory(getCommandHistory());
 
+    commandContextRef.current = nextCtx;
     setCommandContext(nextCtx);
 
     // If clear command
@@ -521,8 +538,8 @@ export default function App() {
     }
 
     // 1. Toast Notification for Newly Discovered Hosts
-    if (nextCtx.discoveredHosts.size > commandContext.discoveredHosts.size) {
-      const newlyDiscovered = Array.from(nextCtx.discoveredHosts).filter(ip => !commandContext.discoveredHosts.has(ip));
+    if (nextCtx.discoveredHosts.size > prevCtx.discoveredHosts.size) {
+      const newlyDiscovered = Array.from(nextCtx.discoveredHosts).filter(ip => !prevCtx.discoveredHosts.has(ip));
       newlyDiscovered.forEach(ip => {
         const hostObj = hosts.find(h => h.ip === ip || h.secondaryIp === ip);
         addToast({
@@ -539,8 +556,8 @@ export default function App() {
     }
 
     // 2. Toast Notification for Newly Compromised Machines
-    if (nextCtx.compromisedHosts.size > commandContext.compromisedHosts.size) {
-      const newlyCompromised = Array.from(nextCtx.compromisedHosts).filter(ip => !commandContext.compromisedHosts.has(ip));
+    if (nextCtx.compromisedHosts.size > prevCtx.compromisedHosts.size) {
+      const newlyCompromised = Array.from(nextCtx.compromisedHosts).filter(ip => !prevCtx.compromisedHosts.has(ip));
       newlyCompromised.forEach(ip => {
         const hostObj = hosts.find(h => h.ip === ip || h.secondaryIp === ip);
         addToast({
@@ -557,7 +574,7 @@ export default function App() {
     }
 
     // 3. Toast Notification for Root Privilege Escalation
-    if (nextCtx.shellMode.includes('_root') && !commandContext.shellMode.includes('_root')) {
+    if (nextCtx.shellMode.includes('_root') && !prevCtx.shellMode.includes('_root')) {
       const rootNames: Record<string, string> = {
         ssh_target50_root: 'target-web-01 (192.168.100.50)',
         ssh_target55_root: 'target-ftp-02 (192.168.100.55)',
@@ -575,8 +592,8 @@ export default function App() {
     }
 
     // 4. Toast Notification for Captured Flags & Auto-fill questions
-    if (nextCtx.foundFlags.size > commandContext.foundFlags.size) {
-      const newlyFlags = Array.from(nextCtx.foundFlags).filter(flagId => !commandContext.foundFlags.has(flagId));
+    if (nextCtx.foundFlags.size > prevCtx.foundFlags.size) {
+      const newlyFlags = Array.from(nextCtx.foundFlags).filter(flagId => !prevCtx.foundFlags.has(flagId));
       newlyFlags.forEach(flagId => {
         const relQuestion = questions.find(q => q.flagKey === flagId);
         let flagTitle = flagId;
@@ -611,7 +628,7 @@ export default function App() {
     }
 
     // 5. Toast Notification for Pivoting Activation
-    if (nextCtx.pivoting.isPivoted && !commandContext.pivoting.isPivoted) {
+    if (nextCtx.pivoting.isPivoted && !prevCtx.pivoting.isPivoted) {
       addToast({
         type: 'pivot',
         title: '⚡ ¡Túnel SOCKS5 Pivoting Activo!',

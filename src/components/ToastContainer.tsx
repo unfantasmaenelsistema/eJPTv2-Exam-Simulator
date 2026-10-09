@@ -40,18 +40,19 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onDismiss }) => {
     const decrement = (interval / duration) * 100;
 
     const timer = setInterval(() => {
-      setProgress(prev => {
-        if (prev <= decrement) {
-          clearInterval(timer);
-          onDismiss(toast.id);
-          return 0;
-        }
-        return prev - decrement;
-      });
+      setProgress(prev => (prev <= decrement ? 0 : prev - decrement));
     }, interval);
 
     return () => clearInterval(timer);
-  }, [isPaused, duration, onDismiss, toast.id]);
+  }, [isPaused, duration]);
+
+  // Dismiss as its own effect once the bar runs out, instead of calling the
+  // parent's setState from inside this component's setProgress updater.
+  useEffect(() => {
+    if (progress <= 0) {
+      onDismiss(toast.id);
+    }
+  }, [progress, onDismiss, toast.id]);
 
   const getStyleConfig = (type: ToastType) => {
     switch (type) {
