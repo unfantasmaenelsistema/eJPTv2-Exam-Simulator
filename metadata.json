@@ -1,0 +1,6 @@
+{
+  "name": "eJPTv2 Exam & Pivoting Simulator",
+  "description": "Simulador interactivo del examen eJPTv2 con topología de red realista (Linux y Windows), pivoting entre subredes, terminal Kali Linux interactiva y cuestionario oficial de certificación.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

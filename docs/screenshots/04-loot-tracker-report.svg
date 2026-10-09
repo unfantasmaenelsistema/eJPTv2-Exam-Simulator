@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" style="background:#090d16; font-family:'Inter', system-ui, sans-serif;">
+  <!-- Background -->
+  <rect width="1280" height="720" fill="#090d16" />
+  <rect width="1280" height="720" fill="none" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Top Header Bar -->
+  <rect x="0" y="0" width="1280" height="48" fill="#0f172a" />
+  <line x1="0" y1="48" x2="1280" y2="48" stroke="#1e293b" stroke-width="1" />
+  <circle cx="24" cy="24" r="6" fill="#ef4444" />
+  <circle cx="44" cy="24" r="6" fill="#f59e0b" />
+  <circle cx="64" cy="24" r="6" fill="#10b981" />
+  <text x="96" y="29" fill="#94a3b8" font-size="13" font-weight="600" font-family="'Fira Code', monospace">Loot Tracker &amp; Professional Penetration Testing Executive Report Generator</text>
+
+  <!-- Left Column: Compromise Radar / Metrics -->
+  <g transform="translate(40, 75)">
+    <rect width="520" height="600" rx="14" fill="#0f172a" stroke="#1e293b" />
+    <text x="24" y="36" fill="#f8fafc" font-size="17" font-weight="700">Progreso de Auditoría &amp; Compromiso</text>
+    <text x="24" y="58" fill="#64748b" font-size="12">Cobertura por dominio según objetivos de la certificación eJPTv2</text>
+
+    <!-- Radar / Metrics Bars -->
+    <g transform="translate(24, 90)">
+      <!-- Metric 1: Reconnaissance -->
+      <text x="0" y="16" fill="#cbd5e1" font-size="13" font-weight="600">Reconocimiento &amp; Escaneo de Red</text>
+      <text x="420" y="16" fill="#10b981" font-size="13" font-weight="700">100%</text>
+      <rect x="0" y="26" width="470" height="8" rx="4" fill="#1e293b" />
+      <rect x="0" y="26" width="470" height="8" rx="4" fill="#10b981" />
+
+      <!-- Metric 2: Web Exploitation -->
+      <text x="0" y="66" fill="#cbd5e1" font-size="13" font-weight="600">Vulnerabilidades Web (SQLi, Upload, XSS)</text>
+      <text x="425" y="66" fill="#10b981" font-size="13" font-weight="700">85%</text>
+      <rect x="0" y="76" width="470" height="8" rx="4" fill="#1e293b" />
+      <rect x="0" y="76" width="400" height="8" rx="4" fill="#06b6d4" />
+
+      <!-- Metric 3: Pivoting & Routing -->
+      <text x="0" y="116" fill="#cbd5e1" font-size="13" font-weight="600">Pivoting de Redes &amp; Proxychains</text>
+      <text x="420" y="116" fill="#10b981" font-size="13" font-weight="700">100%</text>
+      <rect x="0" y="126" width="470" height="8" rx="4" fill="#1e293b" />
+      <rect x="0" y="126" width="470" height="8" rx="4" fill="#8b5cf6" />
+
+      <!-- Metric 4: System Exploitation -->
+      <text x="0" y="166" fill="#cbd5e1" font-size="13" font-weight="600">Explotación de Sistemas (Windows &amp; Linux)</text>
+      <text x="425" y="166" fill="#f59e0b" font-size="13" font-weight="700">78%</text>
+      <rect x="0" y="176" width="470" height="8" rx="4" fill="#1e293b" />
+      <rect x="0" y="176" width="365" height="8" rx="4" fill="#f59e0b" />
+
+      <!-- Metric 5: Cracking & Credentials -->
+      <text x="0" y="216" fill="#cbd5e1" font-size="13" font-weight="600">Ataques a Contraseñas &amp; Hashes</text>
+      <text x="425" y="216" fill="#10b981" font-size="13" font-weight="700">92%</text>
+      <rect x="0" y="226" width="470" height="8" rx="4" fill="#1e293b" />
+      <rect x="0" y="226" width="430" height="8" rx="4" fill="#ec4899" />
+    </g>
+
+    <!-- Overall Summary Card -->
+    <rect x="24" y="370" width="470" height="110" rx="10" fill="#0b1120" stroke="#334155" />
+    <text x="44" y="402" fill="#94a3b8" font-size="12">Máquinas Comprometidas:</text>
+    <text x="44" y="432" fill="#f8fafc" font-size="24" font-weight="700">5 de 6 Hosts</text>
+    <text x="260" y="402" fill="#94a3b8" font-size="12">Flags Capturadas:</text>
+    <text x="260" y="432" fill="#10b981" font-size="24" font-weight="700">4 / 4 Flags</text>
+
+    <!-- Export PDF Action Button -->
+    <rect x="24" y="510" width="470" height="52" rx="10" fill="#2563eb" />
+    <text x="135" y="542" fill="#fff" font-size="15" font-weight="700">📄 Generar Informe Pentest (PDF)</text>
+  </g>
+
+  <!-- Right Column: Loot Table & Credentials -->
+  <g transform="translate(590, 75)">
+    <rect width="650" height="600" rx="14" fill="#0f172a" stroke="#1e293b" />
+    <text x="24" y="36" fill="#f8fafc" font-size="17" font-weight="700">Credenciales &amp; Evidencias (Loot)</text>
+    <text x="24" y="58" fill="#64748b" font-size="12">Hashes obtenidos, contraseñas descifradas y tokens de acceso</text>
+
+    <!-- Table Header -->
+    <rect x="20" y="80" width="610" height="34" rx="6" fill="#1e293b" />
+    <text x="35" y="102" fill="#94a3b8" font-size="11" font-weight="600">HOST / IP</text>
+    <text x="160" y="102" fill="#94a3b8" font-size="11" font-weight="600">USUARIO</text>
+    <text x="270" y="102" fill="#94a3b8" font-size="11" font-weight="600">SECRET / HASH / PASS</text>
+    <text x="500" y="102" fill="#94a3b8" font-size="11" font-weight="600">ESTADO</text>
+
+    <!-- Row 1 -->
+    <g transform="translate(20, 125)">
+      <rect width="610" height="42" rx="6" fill="#0b1120" />
+      <text x="15" y="26" fill="#38bdf8" font-size="11" font-family="'Fira Code', monospace">192.168.100.50</text>
+      <text x="140" y="26" fill="#cbd5e1" font-size="12" font-weight="600">admin</text>
+      <text x="250" y="26" fill="#94a3b8" font-size="11" font-family="'Fira Code', monospace">admin2023! (md5)</text>
+      <rect x="480" y="10" width="80" height="22" rx="4" fill="#10b98122" stroke="#10b981" stroke-width="0.5" />
+      <text x="492" y="25" fill="#10b981" font-size="10" font-weight="600">CRACKED</text>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(20, 175)">
+      <rect width="610" height="42" rx="6" fill="#0b1120" />
+      <text x="15" y="26" fill="#c084fc" font-size="11" font-family="'Fira Code', monospace">192.168.100.200</text>
+      <text x="140" y="26" fill="#cbd5e1" font-size="12" font-weight="600">root</text>
+      <text x="250" y="26" fill="#94a3b8" font-size="11" font-family="'Fira Code', monospace">id_rsa (SSH Private Key)</text>
+      <rect x="480" y="10" width="80" height="22" rx="4" fill="#8b5cf622" stroke="#8b5cf6" stroke-width="0.5" />
+      <text x="497" y="25" fill="#c084fc" font-size="10" font-weight="600">KEY ROOT</text>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(20, 225)">
+      <rect width="610" height="42" rx="6" fill="#0b1120" />
+      <text x="15" y="26" fill="#fbbf24" font-size="11" font-family="'Fira Code', monospace">10.10.10.25</text>
+      <text x="140" y="26" fill="#cbd5e1" font-size="12" font-weight="600">Administrator</text>
+      <text x="250" y="26" fill="#fbbf24" font-size="11" font-family="'Fira Code', monospace">aad3b435b51404e... (NTLM)</text>
+      <rect x="480" y="10" width="95" height="22" rx="4" fill="#fbbf2422" stroke="#fbbf24" stroke-width="0.5" />
+      <text x="488" y="25" fill="#fbbf24" font-size="10" font-weight="600">PTH / RDP OK</text>
+    </g>
+
+    <!-- Row 4 -->
+    <g transform="translate(20, 275)">
+      <rect width="610" height="42" rx="6" fill="#0b1120" />
+      <text x="15" y="26" fill="#60a5fa" font-size="11" font-family="'Fira Code', monospace">10.10.10.30</text>
+      <text x="140" y="26" fill="#cbd5e1" font-size="12" font-weight="600">dbadmin</text>
+      <text x="250" y="26" fill="#94a3b8" font-size="11" font-family="'Fira Code', monospace">root1234! (MySQL)</text>
+      <rect x="480" y="10" width="80" height="22" rx="4" fill="#10b98122" stroke="#10b981" stroke-width="0.5" />
+      <text x="496" y="25" fill="#10b981" font-size="10" font-weight="600">VALID DB</text>
+    </g>
+
+    <!-- Flag Showcase Box -->
+    <rect x="20" y="345" width="610" height="220" rx="10" fill="#0b1120" stroke="#334155" />
+    <text x="35" y="375" fill="#f8fafc" font-size="14" font-weight="700">🚩 Banderas de Examen Capturadas (Proof of Concept)</text>
+    
+    <g transform="translate(35, 395)" font-family="'Fira Code', monospace" font-size="11">
+      <rect width="575" height="30" rx="4" fill="#1e293b" />
+      <text x="12" y="20" fill="#10b981">DMZ Web:    FLAG{eJPTv2_DMZ_W3B_PWN3D_2024}</text>
+
+      <rect y="40" width="575" height="30" rx="4" fill="#1e293b" />
+      <text x="12" y="60" fill="#8b5cf6">Gateway:    FLAG{eJPTv2_G4T3W4Y_P1V0T_R0UT3_OK}</text>
+
+      <rect y="80" width="575" height="30" rx="4" fill="#1e293b" />
+      <text x="12" y="100" fill="#f59e0b">WinServer:  FLAG{eJPTv2_W1ND0W5_P1V0T_D0M1N4T10N}</text>
+
+      <rect y="120" width="575" height="30" rx="4" fill="#1e293b" />
+      <text x="12" y="140" fill="#ec4899">BadBlue:    FLAG{eJPTv2_B4DBLU3_BUFF3R_0V3RFL0W}</text>
+    </g>
+  </g>
+</svg>
